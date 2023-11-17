@@ -1,0 +1,64 @@
+.table {
+	background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+    align-items: center;
+
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+}
+
+.row:hover {
+	color: rgb(32, 199, 221);
+
+}
+
+.row:nth-child(even) {
+	background-color: #ffffff;
+    justify-content: center;
+}
+
+.row:nth-child(even):hover {
+	color: rgb(32, 199, 221);
+    justify-content: center;
+}
+
+.header .row {
+	padding: 10px;
+}
+
+.header .row div {
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+	color: white;
+}
+
+.body .row {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.body .row div {
+	display: flex;
+	justify-content: center;
+}
+
+.options {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.page-active {
+	color: rgb(32, 199, 221);
+}
+.image_weather {
+    width: 150px;
+    height: auto;
+    display: block; /* Elimina el espacio adicional por debajo de la imagen */
+    margin: 0 ; /* Centra la imagen horizontalmente */
+}

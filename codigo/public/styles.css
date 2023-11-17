@@ -1,0 +1,142 @@
+body {
+    font-family: 'Baloo', sans-serif;
+    background-color: #ffffff; /* Plain white background */
+    color: #000000; /* Black text color */
+    margin: 0; /* Remove default margin to ensure content goes to the edges of the screen */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fcfcfc; /* Black header background */
+    color: #000000; /* White text color */
+}
+
+.logo {
+    font-size: 30px; /* Increase the font size for the logo */
+}
+
+#snap {
+    color: #000000; /* Black color for "SNAP" */
+}
+
+#list {
+    color: #18A9FA; /* Blue color for "LIST" */
+}
+
+/* Style for the regresar button*/
+#regresarBtn {
+    font-family: 'Baloo', sans-serif;
+    background-color: #e7e7e7; /* White background color */
+    color: #000000; /* Black font color */
+    padding: 10px 30px; /* Padding for the button */
+    border: none; /* Remove button border */
+    border-radius: 30px; /* Pill-shaped button */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+#regresarBtn:hover {
+    background-color: #18A9FA; /* Blue background on hover */
+    color: #ffffff; /* White font color on hover */
+}
+
+/* Style for the search bar */
+#search {
+    padding: 10px; /* Add padding for the input field */
+    border: none; /* Remove the border */
+    border-radius: 20px; /* Rounded corners */
+    background-color: #cfcfcf; /* Light gray background */
+    font-size: 16px;
+    height: 20px;
+    width: 300px; /* Adjust the width as needed */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+#search::placeholder {
+    color: #666; /* Placeholder text color */
+}
+
+#search:hover {
+    background-color: #e0e0e0; /* Lighter gray background on hover */
+}
+
+nav {
+    background-color: #fcfcfc; /* Black navigation background */
+    color: #000000; /* White text color */
+    float: left; /* Float the navigation to the left side */
+    width: 200px; /* Set a fixed width for the navigation */
+    height: 100vh; /* Set full height for the navigation */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0.5;
+}
+
+nav li {
+    margin: 55px 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000000; /* White text color for navigation links */
+    transition: background-color 0.3s;
+    text-align: left; /* Center the text within the button */
+    display: inline-block; /* Make the link a block-level element */
+    padding: 10px 20px; /* Increase padding to create a larger hover effect */
+    border-radius: 30px; /* Use border-radius to create a pill-like shape */
+
+}
+
+nav a:hover {
+    background-color: #000000; /* Black background on hover */
+    color: #ffffff; /* White text color on hover */
+}
+
+main {
+    margin-left: 210px; /* Adjust margin to accommodate the width of the navigation */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#DateTime {
+    margin: 10px; /* Remove default margin */
+    font-size: 40px;
+}
+
+#weather {
+    margin-top: 10px; /* Add some spacing from the DateTime element */
+    margin: 11px; /* Remove default margin */
+    font-size: 18px;
+    color: #333333; /* Dark text color for the weather element */
+}
+
+#createTaskBtn {
+    font-family: 'Baloo', sans-serif;
+    background-color: #e7e7e7; /* White background color */
+    color: #000000; /* Black font color */
+    padding: 10px 30px; /* Padding for the button */
+    border: none; /* Remove button border */
+    border-radius: 30px; /* Pill-shaped button */
+    margin-left: 1010px; 
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+#createTaskBtn:hover {
+    background-color: #18A9FA; /* Blue background on hover */
+    color: #ffffff; /* White font color on hover */
+}
+
+
+
+
+
+
+
+

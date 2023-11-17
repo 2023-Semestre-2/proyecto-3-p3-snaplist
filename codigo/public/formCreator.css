@@ -1,0 +1,68 @@
+/* Add these styles to a new CSS file, e.g., taskCreatorStyles.css */
+
+body {
+    font-family: 'Baloo', sans-serif;
+    background-color: #ffffff; /* Plain white background */
+    color: #000000; /* Black text color */
+    margin: 0; /* Remove default margin to ensure content goes to the edges of the screen */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.task-creator {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the card effect */
+    border-radius: 10px;
+    padding: 20px;
+    width: 550px; /* Adjust the width based on your design preferences */
+}
+
+h2 {
+    text-align: center;
+    color: #000000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    color: #18A9FA; /* Blue color for labels */
+}
+
+input,
+select,
+button {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #18A9FA; /* Blue border for input elements */
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #007BFF; /* Darker blue color on focus */
+}
+
+button {
+    background-color: #18A9FA; /* Blue background color for the button */
+    color: #ffffff; /* White font color for the button */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #007BFF; /* Darker blue color on hover */
+}
+

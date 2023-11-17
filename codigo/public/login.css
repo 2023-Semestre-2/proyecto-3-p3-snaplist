@@ -1,0 +1,87 @@
+body {
+    font-family: 'Baloo', sans-serif;
+    background-color: #ffffff; /* Plain white background */
+    color: #000000; /* Black text color */
+    margin: 0; /* Remove default margin to ensure content goes to the edges of the screen */
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: #ffffff; /* Black header background */
+    color: #ffffff; /* White text color */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.login-container {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the card effect */
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px; /* Adjust the width based on your design preferences */
+    align-items: center;
+    margin-left: 200px;
+    margin-right: 500px;
+    margin-top: 0px;
+}
+
+h2 {
+    color: #000000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    color: #18A9FA; /* Blue color for labels */
+}
+
+input,
+button {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #18A9FA; /* Blue border for input elements */
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007BFF; /* Darker blue color on focus */
+}
+
+button {
+    background-color: #000000; /* Black background color for the button */
+    color: #ffffff; /* White font color for the button */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+    border-radius: 30px; /* Pill-shaped button */
+}
+
+button:hover {
+    background-color: #ffffff; /* White background on hover */
+    color: #000000; /* Black font color on hover */
+}
+
+a {
+    text-decoration: none;
+    color: #18A9FA; /* Blue color for the link */
+}
+.logo{
+    margin-top: 100px;
+    margin-right: 100px;
+    font-size : 100px;
+}
