@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>SnapList</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span id="snap">SNAP</span><span id="list">LIST</span>
+        </div>
+        <input type="text" id="search" placeholder="   Buscar tarea">
+        <div class="profile-info">
+            <span id="username">User Name</span>
+            <span id="role">User Role</span>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/main">Página principal</a></li>
+            <li><a href="#">Productividad</a></li>
+            <li><a href="#">Tareas completadas</a></li>
+            <li><a href="/tasks">Tareas pendientes</a></li>
+            <li><a href="/categories">Categorías</a></li>
+            <li><a href="/perfile">Perfil</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="DateTime"></div>
+        <div id="weather"></div>
+        <img class="image_weather" src="/images/descarga.png" alt="Imagen del clima">
+        <!-- New button for creating a new task -->
+        <a href="/newTask" id="createTaskBtn">Crear nueva tarea</a>
+
+        <div class="table">
+            <div clasS="header">
+                <div class="row">
+                    <h1>Pendientes:</h1>
+                    <h1>Categorias:</h1>
+                </div>
+            </div>
+            <div class="body" id="tableBody">
+               
+                <!-- Las filas se agregarán aquí dinámicamente -->
+            </div>
+        </div>
+        </div>
+        <!-- Your notes and to-do list content will go here -->
+    </main>
+    <script src="/DateTime.js"></script>
+    <script src="/weather.js"></script>
+    <script>
+        async function obtenerNombresDeCategorias() {
+            try {
+                const response = await fetch('http://localhost:3000/categorias');
+                const categorias = await response.json();
+
+                // Extraer solo los nombres de las categorías
+                const nombres = categorias.map(categoria => categoria.name);
+
+                return nombres;
+            } catch (error) {
+                console.error(error.message);
+                return []; // Devuelve un array vacío en caso de error
+            }
+        }
+
+
+        async function obtenerNombresDeTareas() {
+            try {
+                const response = await fetch('http://localhost:3000/getTask');
+
+                // Verificar si la respuesta es un código de estado exitoso (200 OK)
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.statusText}`);
+                }
+
+                // Intentar analizar la respuesta como JSON
+                const tareas = await response.json();
+
+                // Verificar si la respuesta es un array
+                if (!Array.isArray(tareas)) {
+                    throw new Error('La respuesta no es un array JSON');
+                }
+
+                // Extraer solo los nombres de las tareas
+                const nombres = tareas.map(tarea => tarea.name);
+
+                return nombres;
+            } catch (error) {
+                console.error('Error al obtener tareas:', error.message);
+                return []; // Devuelve un array vacío en caso de error
+            }
+        }
+
+        // Llamada a la función para obtener solo los nombres de tareas
+        obtenerNombresDeTareas()
+            .then(nombresDeTareas => {
+                // Puedes usar 'nombresDeTareas' como una constante en el resto de tu código
+                console.log(nombresDeTareas);
+            })
+            .catch(error => {
+                console.error(error.message);
+            });
+
+        function crearFilaTareas(tarea) {
+            const row = document.createElement('div');
+            row.classList.add('row');
+
+            // Crear celdas para cada columna
+            const tareaCell = document.createElement('div');
+            tareaCell.textContent = tarea;
+            row.appendChild(tareaCell);
+
+            // Puedes agregar más celdas si las tareas tienen más propiedades
+
+            return row;
+        }
+
+        function crearFilaCategorias(categoria) {
+            const row = document.createElement('div');
+            row.classList.add('row');
+
+            // Crear celdas para cada columna
+            const categoriaCell = document.createElement('div');
+            categoriaCell.textContent = categoria;
+            row.appendChild(categoriaCell);
+
+            // Puedes agregar más celdas si las categorías tienen más propiedades
+
+            return row;
+        }
+        async function cargarYMostrarDatos() {
+            try {
+                const nombresDeTareas = await obtenerNombresDeTareas();
+                const nombresDeCategorias = await obtenerNombresDeCategorias();
+
+                const tableBody = document.getElementById('tableBody');
+                tableBody.innerHTML = '';
+                // Asegurarse de tener la misma longitud para tareas y categorías
+                const cantidadFilas = Math.max(nombresDeTareas.length, nombresDeCategorias.length);
+
+                for (let i = 0; i < cantidadFilas; i++) {
+                    const row = document.createElement('div');
+                    row.classList.add('row');
+
+                    // Agregar celda para tarea en la columna 1 si hay una tarea disponible
+                    if (i < nombresDeTareas.length) {
+                        const tareaCell = document.createElement('div');
+                        tareaCell.textContent = nombresDeTareas[i];
+                        row.appendChild(tareaCell);
+                    }
+
+                    // Agregar celda para categoría en la columna 2 si hay una categoría disponible
+                    if (i < nombresDeCategorias.length) {
+                        const categoriaCell = document.createElement('div');
+                        categoriaCell.textContent = nombresDeCategorias[i];
+                        row.appendChild(categoriaCell);
+                    }
+
+                    // Agregar la fila al cuerpo de la tabla
+                    tableBody.appendChild(row);
+                }
+            } catch (error) {
+                console.error('Error al cargar y mostrar datos:', error.message);
+            }
+        }
+        // Llamar a la función para cargar datos al cargar la página
+        cargarYMostrarDatos();
+    </script>
+</body>
+
+</html>

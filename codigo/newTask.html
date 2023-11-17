@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/formCreator.css">
+    <title>SnapList</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    npm install cors
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span id="snap">SNAP</span><span id="list">LIST</span>
+        </div>
+        <input type="text" id="search" placeholder="   Buscar tarea">
+        <div class="profile-info">
+            <span id="username">User Name</span>
+            <span id="role">User Role</span>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/main">Página principal</a></li>
+            <li><a href="#">Productividad</a></li>
+            <li><a href="#">Tareas completadas</a></li>
+            <li><a href="/tasks">Tareas pendientes</a></li>
+            <li><a href="/categories">Categorías</a></li>
+            <li><a href="/perfile">Perfil</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- Your notes and to-do list content will go here -->
+
+        <div class="task-creator">
+            <h2>Crear Nueva Tarea</h2>
+            <form id="taskForm">
+                <label for="taskName">Nombre de la Tarea:</label>
+                <input type="text" id="taskName" name="taskName" required>
+
+                <label for="description">Descripción:</label>
+                <input type="text" id="description" name="description" required>
+
+                <label for="category">Categoría:</label>
+                <select id="category" required></select>
+
+                <label for="dueDate">Fecha de Entrega:</label>
+                <input type="date" id="dueDate" name="dueDate" required>
+
+                <label for="priority">Prioridad:</label>
+                <select id="priority" name="priority">
+                    <option value="baja">Baja</option>
+                    <option value="intermedia">Intermedia</option>
+                    <option value="alta">Alta</option>
+                </select>
+
+                <button type="button" onclick="addTask()">Crear Tarea</button>
+            </form>
+            <ul id="taskList"></ul>
+        </div>
+
+        <a href="/main" id="regresarBtn">Regresar</a>
+
+    </main>
+    <script>
+        async function cargarCategorias() {
+            try {
+                const response = await fetch('http://localhost:3000/categorias');
+                const categorias = await response.json();
+                const categorySelect = document.getElementById('category');
+
+                categorias.forEach(categoria => {
+                    const option = document.createElement('option');
+
+                    // Modificado para incluir name, description y due date en la opción
+                    option.value = categoria.name;
+                    option.text = `${categoria.name}`;
+
+                    categorySelect.add(option);
+                });
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        async function addTask() {
+            // Obtener los valores del formulario
+            var taskName = document.getElementById('taskName').value;
+            var description = document.getElementById('description').value;
+            var category = document.getElementById('category').value;
+            var dueDate = document.getElementById('dueDate').value;
+            var priority = document.getElementById('priority').value;
+
+            // Crear un objeto con los datos de la tarea
+            var task = {
+                name: taskName,
+                description: description,
+                category: category,
+                dueDate: dueDate,
+                priority: priority
+            };
+
+            try {
+                // Enviar la tarea al servidor
+                const response = await fetch('http://localhost:3000/addTask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(task)
+                });
+
+                if (response.ok) {
+                    // Limpiar el formulario después de guardar la tarea
+                    document.getElementById('taskForm').reset();
+                    alert('Tarea guardada exitosamente.');
+                } else {
+                    throw new Error('Error al guardar la tarea.');
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        cargarCategorias();
+    </script>
+</body>
+
+</html>

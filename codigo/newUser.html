@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="formnewUser.css">
+    <title>SnapList</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span id="snap">SNAP</span><span id="list">LIST</span>
+        </div>
+    </header>
+    <main>
+
+        <div class="task-creator">
+            <h2>Registrar Usuario</h2>
+            <form id="loginForm">
+                <label for="userName">Nombre completo:</label>
+                <input type="text" id="userName" name="userName" required>
+
+                <label for="userLogin">Usuario:</label>
+                <input type="text" id="userLogin" name="userLogin" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="text" id="password" name="password" required>
+
+                <label for="dateBirth">Fecha de cumpleaños:</label>
+                <input type="date" id="dateBirth" name="dateBirth" required>
+
+                <label for="userCategory">Modo de uso:</label>
+                <select id="userCategory" name="userCategory">
+                    <option value="categoria1">Estudiante</option>
+                    <option value="categoria2">Equipo de Trabajo</option>
+                    <option value="categoria3">Profesor</option>
+                    <option value="categoria3">Personal</option>
+                </select>
+
+                <button type="button" onclick="createUser()">Crear Usuario</button>
+            </form>
+        </div>
+
+        <a href="/" id="regresarBtn">Regresar</a>
+
+    </main>
+    <script>
+        async function createUser() {
+            // Obtener los valores del formulario
+            var userName = document.getElementById('userName').value;
+            var userLogin = document.getElementById('userLogin').value;
+            var password = document.getElementById('password').value;
+            var dateBirth = document.getElementById('dateBirth').value;
+            var userCategory = document.getElementById('userCategory').value;
+
+            // Crear un objeto con los datos del usuario
+            var user = {
+                userName: userName,
+                userLogin: userLogin,
+                password: password,
+                dateBirth: dateBirth,
+                userCategory: userCategory
+            };
+
+            try {
+                // Enviar el usuario  al servidor
+                const response = await fetch('http://localhost:3000/createUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                });
+
+                if (response.ok) {
+                    // Limpiar el formulario después de guardar el usuario
+                    document.getElementById('loginForm').reset();
+                    alert('Usuario guardado exitosamente.');
+                } else {
+                    throw new Error('Error al guardar el usuario.');
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+    </script>
+</body>
+</html>

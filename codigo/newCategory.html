@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="formCreator.css">
+    <title>SnapList</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span id="snap">SNAP</span><span id="list">LIST</span>
+        </div>
+        <input type="text" id="search" placeholder="   Buscar tarea">
+        <div class="profile-info">
+            <span id="username">User Name</span>
+            <span id="role">User Role</span>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/main">Página principal</a></li>
+            <li><a href="#">Productividad</a></li>
+            <li><a href="#">Tareas completadas</a></li>
+            <li><a href="/tasks">Tareas pendientes</a></li>
+            <li><a href="/categories">Categorías</a></li>
+            <li><a href="/perfile">Perfil</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- Your notes and to-do list content will go here -->
+
+        <div class="task-creator">
+            <h2>Crear Nueva Categoria</h2>
+            <form id="categoryForm">
+                <label for="categoryName">Nombre de la Categoría:</label>
+                <input type="text" id="categoryName" name="categoryName" required>
+
+                <label for="categoryDescription">Descripción:</label>
+                <input type="text" id="categoryDescription" name="categoryDescription" required>
+
+
+                <label for="creationDate">Fecha de Creación:</label>
+                <input type="date" id="creationDate" name="creationDate" required>
+
+                <button type="button" onclick="addCategory()">Crear Categoría</button>
+            </form>
+        </div>
+
+        <a href="/main" id="regresarBtn">Regresar</a>
+
+    </main>
+    <script>
+        async function addCategory() {
+            // Obtener los valores del formulario
+            var categoryname = document.getElementById('categoryName').value;
+            var description = document.getElementById('categoryDescription').value;
+            var createDate = document.getElementById('creationDate').value;
+
+            // Crear un objeto con los datos de la categoria 
+            var category = {
+                name: categoryname,
+                description:description,
+                createDate: createDate
+            };
+
+            try {
+                // Enviar la categoria  al servidor
+                const response = await fetch('http://localhost:3000/addCategory', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(category)
+                });
+
+                if (response.ok) {
+                    // Limpiar el formulario después de guardar la tarea
+                    document.getElementById('categoryForm').reset();
+                    alert('Categoria guardada exitosamente.');
+                } else {
+                    throw new Error('Error al guardar la categoria.');
+                }
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+    </script>
+</body>
+</html>
